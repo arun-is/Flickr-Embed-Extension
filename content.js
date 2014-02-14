@@ -17,7 +17,7 @@ regex = new RegExp(regex);
 
 var x = new XMLHttpRequest()
 var url = document.URL.match(/.*flickr.com\/photos\/[a-zA-Z0-9_]*\/[0-9]*/)[0] + '/sizes/' + size;
-console.log(url);
+
 x.open('GET', url, true);
 
 function copyToClipboard(text) {
@@ -30,9 +30,14 @@ x.onreadystatechange = function () {
         var newWidthHeight = x.responseText.match(regex)[1].split(' x ');
         var newWidth = newWidthHeight[0];
         var newHeight = newWidthHeight[1];
-        var embedCode = html.replace(oldEmbedUrl, newEmbedURl).replace(oldWidth, newWidth).replace(oldHeight, newHeight);
+        
+        newHeight = Math.round(parseInt(newHeight) * 800 / parseInt(newWidth));
+        newWidth = 800;  
+        var embedCode = html.replace(oldEmbedUrl, newEmbedURl);
+        embedCode = embedCode.replace('width="' + oldWidth + '"', 'width="' + newWidth + '"').replace('height="' + oldHeight + '"', 'height="' + newHeight + '"');
         copyToClipboard(embedCode);
     }
 }
 
 x.send();
+
