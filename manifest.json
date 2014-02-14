@@ -1,0 +1,24 @@
+{
+    "manifest_version": 2,
+
+    "name": "Flickr Embed Generator",
+    "description": "This extension generates a Flickr embed code",
+    "version": "1.0",
+
+    "background": {
+        "scripts": ["background.js"]
+    },
+
+    "permissions": [
+        "https://www.flickr.com/photos/*/*",
+        "http://www.flickr.com/photos/*/*"
+    ],
+
+    "browser_action": {
+        "default_icon": "icon.png"
+    },
+
+	"icons": { "16": "16.png",
+	           "48": "48.png",
+	          "128": "128.png" }
+}
